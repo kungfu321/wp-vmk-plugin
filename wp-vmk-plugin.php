@@ -95,16 +95,16 @@ class WPVMKPLUGIN
     public function registerShortCodes()
     {
         // your shortcode here
-        add_shortcode('wpvmkp', 'shortcode_wpvmkp');
-        function shortcode_wpvmkp($atts)
-        {
-            $random = md5(uniqid(rand(), true));
+        // add_shortcode('wpvmkplugin', 'shortcode_wpvmkplugin');
+        // function shortcode_wpvmkplugin($atts)
+        // {
+        //     $random = md5(uniqid(rand(), true));
 
-            return "<div
-                    class='WPVMKPLUGIN_frontend_app'
-                    id='WPVMKPFrontend{$random}'
-                ></div>";
-        }
+        //     return "<div
+        //             class='WPVMKPLUGIN_frontend_app'
+        //             id='WPVMKPFrontend{$random}'
+        //         ></div>";
+        // }
     }
 
     // disable update nag on admin dashboard
