@@ -15,7 +15,8 @@ const initialValue = {
   authorUrl: 'https://vomanhkien.com',
   authorName: 'Vo Manh Kien',
   authorEmail: 'hi@vomanhkien.com',
-  pluginShortDesc: 'WP VMK Plugin'
+  pluginShortDesc: 'WP VMK Plugin',
+  pluginPackage: 'WPVMKP'
 };
 
 const pluginName = () => {
@@ -56,17 +57,6 @@ const authorName = () => {
     rl.question('Author Name: ', (answer) => {
       if (!answer) {
         resolve(initialValue.authorName);
-      }
-      resolve(answer);
-    })
-  })
-}
-
-const authorEmail = () => {
-  return new Promise((resolve) => {
-    rl.question('Author Email: ', (answer) => {
-      if (!answer) {
-        resolve(initialValue.authorEmail);
       }
       resolve(answer);
     })
@@ -143,7 +133,6 @@ const main = async () => {
   const pluginSlugAnswer = await pluginSlug();
   const pluginUrlAnswer = await pluginUrl();
   const authorNameAnswer = await authorName();
-  const authorEmailAnswer = await authorEmail();
   const authorUrlAnswer = await authorUrl();
   const pluginShortDescAnswer = await pluginShortDesc();
   rl.close();
@@ -151,7 +140,7 @@ const main = async () => {
   try {
     await updatePackageJson(pluginSlugAnswer, pluginShortDescAnswer);
     await renameFile(pluginSlugAnswer);
-    
+
     // change plugin slug content
     await changePluginContent([
       `${pluginSlugAnswer}.php`,
@@ -171,6 +160,17 @@ const main = async () => {
       `${pluginSlugAnswer}.php`,
       'readme.txt',
     ], initialValue.authorName, authorNameAnswer);
+
+    // change plugin url
+    await changePluginContent([
+      `${pluginSlugAnswer}.php`,
+    ], initialValue.pluginUrl, pluginUrlAnswer);
+
+    // change author url
+    await changePluginContent([
+      `${pluginSlugAnswer}.php`,
+    ], initialValue.authorUrl, authorUrlAnswer);
+
   } catch (error) {
     const { exec } = require('child_process');
 

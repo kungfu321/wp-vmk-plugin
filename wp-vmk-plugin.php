@@ -7,6 +7,8 @@
  * Author: Vo Manh Kien
  * Author URI: https://vomanhkien.com
  * Version: 1.0.0
+ * Text Domain:   wp-vmk-plugin
+ * Domain Path:   /languages
  */
 define('WPVMKP_URL', plugin_dir_url(__FILE__));
 define('WPVMKP_DIR', plugin_dir_path(__FILE__));
@@ -14,7 +16,7 @@ define('WPVMKP_DIR', plugin_dir_path(__FILE__));
 define('WPVMKP_VERSION', '1.0.0');
 
 // This will automatically update, when you run dev or production
-define('WPVMKP_PRODUCTION', 'yes');
+define('WPVMKP_DEVELOPMENT', 'yes');
 
 class WPVMKPlugin
 {
