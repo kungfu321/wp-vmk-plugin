@@ -2,6 +2,7 @@
 
 const readline = require("readline");
 const fs = require("fs-extra");
+const { exec } = require('child_process');
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -200,8 +201,6 @@ const main = async () => {
     exec('rm -rf .git');
 
   } catch (error) {
-    const { exec } = require('child_process');
-
     exec('git reset --hard && git clean -fxd', (error) => {
       if (error) {
         console.error(`exec error: ${error}`);
