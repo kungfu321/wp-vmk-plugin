@@ -86,6 +86,7 @@ const pluginShortDesc = () => {
 }
 
 const updatePackageJson = async (slug, desc) => {
+  if (slug === initialValue.pluginSlug && desc === initialValue.description) return;
   return new Promise((resolve) => {
     fs.readFile('package.json', 'utf8', function (err, data) {
       if (err) throw err;
@@ -106,6 +107,7 @@ const updatePackageJson = async (slug, desc) => {
 }
 
 const renameFile = async (slug) => {
+  if (slug === initialValue.pluginSlug) return;
   return new Promise((resolve) => {
     fs.rename(`${initialValue.pluginSlug}.php`, `${slug}.php`)
       .then(() => resolve())
@@ -114,6 +116,7 @@ const renameFile = async (slug) => {
 }
 
 const changePluginContent = async (files, oldContent, newContent) => {
+  if (oldContent === newContent) return;
   return new Promise((resolve, reject) => {
     files.forEach(file => {
       fs.readFile(file, 'utf8')
@@ -171,6 +174,11 @@ const main = async () => {
       `${pluginSlugAnswer}.php`,
     ], initialValue.authorUrl, authorUrlAnswer);
 
+    // change plugin short desc
+    await changePluginContent([
+      `${pluginSlugAnswer}.php`,
+    ], initialValue.pluginShortDesc, pluginShortDescAnswer);
+
     // change plugin Package
     await changePluginContent([
       `${pluginSlugAnswer}.php`,
@@ -186,8 +194,10 @@ const main = async () => {
       'src/frontend/frontend.js',
       'src/admin/Bits/Plugin.js'
     ], initialValue.pluginPackage,
-      pluginNameAnswer.toUpperCase().replaceAll(' ', '')
+      `${pluginNameAnswer}`.toUpperCase().replaceAll(' ', '')
     );
+
+    exec('rm -rf .git');
 
   } catch (error) {
     const { exec } = require('child_process');
