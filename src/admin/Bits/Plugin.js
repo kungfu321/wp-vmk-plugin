@@ -9,7 +9,7 @@ import {
     removeAllActions
 } from '@wordpress/hooks';
 
-export default class WPVMKPlugin {
+export default class WPVMKPLUGIN {
     constructor() {
         this.doAction = doAction;
         this.addFilter = addFilter;
@@ -18,7 +18,7 @@ export default class WPVMKPlugin {
         this.removeAllActions = removeAllActions;
         //
         this.AJAX = ajax;
-        this.appVars = window.WPVMKPluginAdmin;
+        this.appVars = window.WPVMKPLUGINAdmin;
         this.app = this.extendVueConstructor();
     }
 

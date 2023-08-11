@@ -10,7 +10,6 @@ lerna-debug.log*
 ## specific
 
 node_modules
-assets
 svn
 svn.php
 pro_build.php

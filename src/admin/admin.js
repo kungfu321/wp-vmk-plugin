@@ -1,17 +1,17 @@
 import routes from './routes';
 import { createWebHashHistory, createRouter } from 'vue-router'
-import WPVMKPlugin from './Bits/Plugin';
+import WPVMKPLUGIN from './Bits/Plugin';
 
 const router = createRouter({
     history: createWebHashHistory(),
     routes
 });
 
-const framework = new WPVMKPlugin();
+const framework = new WPVMKPLUGIN();
 
-framework.app.config.globalProperties.appVars = window.WPVMKPluginAdmin;
+framework.app.config.globalProperties.appVars = window.WPVMKPLUGINAdmin;
 
-window.WPVMKPluginApp = framework.app.use(router).mount('#WPVMKPLUGIN_app');
+window.WPVMKPLUGINApp = framework.app.use(router).mount('#WPVMKPLUGIN_app');
 
 router.afterEach((to, from) => {
     jQuery('.WPVMKPLUGIN_menu_item').removeClass('active');

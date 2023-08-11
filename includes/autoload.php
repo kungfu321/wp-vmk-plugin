@@ -3,14 +3,14 @@
 /**
  * Autoloader
  *
- * @package WPVMKPlugin
+ * @package WPVMKPLUGIN
  */
 
 if (!defined('ABSPATH')) {
     exit;
 }
 include 'global_functions.php';
-if (!function_exists('WPVMKPluginAutoload')) {
+if (!function_exists('WPVMKPLUGINAutoload')) {
     /**
      * Plugin autoloader.
      *
@@ -22,10 +22,10 @@ if (!function_exists('WPVMKPluginAutoload')) {
      *
      * @param $class
      */
-    function WPVMKPluginAutoload($class)
+    function WPVMKPLUGINAutoload($class)
     {
         // Do not load unless in plugin domain.
-        $namespace = 'WPVMKPlugin';
+        $namespace = 'WPVMKPLUGIN';
         if (strpos($class, $namespace) !== 0) {
             return;
         }
@@ -45,5 +45,5 @@ if (!function_exists('WPVMKPluginAutoload')) {
         }
     }
     // Register the autoloader.
-    spl_autoload_register('WPVMKPluginAutoload');
+    spl_autoload_register('WPVMKPLUGINAutoload');
 }

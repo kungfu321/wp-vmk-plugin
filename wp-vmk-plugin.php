@@ -18,7 +18,7 @@ define('WPVMKPLUGIN_VERSION', '1.0.0');
 // This will automatically update, when you run dev or production
 define('WPVMKPLUGIN_DEVELOPMENT', 'yes');
 
-class WPVMKPlugin
+class WPVMKPLUGIN
 {
     public function boot()
     {
@@ -43,7 +43,7 @@ class WPVMKPlugin
             }
             global $submenu;
             add_menu_page(
-                'WPVMKPlugin',
+                'WPVMKPLUGIN',
                 'WP VMK Plugin',
                 'manage_options',
                 'wp-vmk-plugin.php',
@@ -66,7 +66,7 @@ class WPVMKPlugin
 
     public function renderAdminPage()
     {
-        $loadAssets = new \WPVMKPlugin\Classes\LoadAssets();
+        $loadAssets = new \WPVMKPLUGIN\Classes\LoadAssets();
         $loadAssets->admin();
 
         $WPVMKPLUGIN = apply_filters('WPVMKPLUGIN/admin_app_vars', array(
@@ -83,7 +83,7 @@ class WPVMKPlugin
 
     public function renderFrontendPage()
     {
-        $loadAssets = new \WPVMKPlugin\Classes\LoadAssets();
+        $loadAssets = new \WPVMKPLUGIN\Classes\LoadAssets();
         $loadAssets->frontend();
 
         wp_localize_script('WPVMKPLUGIN-script-boot-frontend', 'WPVMKPFrontend', array(
@@ -126,10 +126,10 @@ class WPVMKPlugin
         //activation deactivation hook
         register_activation_hook(__FILE__, function ($newWorkWide) {
             require_once(WPVMKPLUGIN_DIR . 'includes/Classes/Activator.php');
-            $activator = new \WPVMKPlugin\Classes\Activator();
+            $activator = new \WPVMKPLUGIN\Classes\Activator();
             $activator->migrateDatabases($newWorkWide);
         });
     }
 }
 
-(new WPVMKPlugin())->boot();
+(new WPVMKPLUGIN())->boot();

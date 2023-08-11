@@ -1,6 +1,6 @@
 <?php
 
-namespace WPVMKPlugin\Classes;
+namespace WPVMKPLUGIN\Classes;
 
 if (!defined('ABSPATH')) {
     exit;

@@ -1,8 +1,8 @@
 <?php
 
-namespace WPVMKPlugin\Classes;
+namespace WPVMKPLUGIN\Classes;
 
-use WPVMKPlugin\Classes\Vite;
+use WPVMKPLUGIN\Classes\Vite;
 
 class LoadAssets
 {
