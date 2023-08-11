@@ -7,7 +7,8 @@
         "watch": "npm run dev",
         "build": "node src/env/production_mode.js && vite build",
         "production": "npm run build",
-        "build-zip": "yarn production && node scripts/build-zip.js"
+        "build-zip": "yarn production && node scripts/build-zip.js",
+        "initial": "node scripts/initial.js"
     },
     "main": "index.js",
     "dependencies": {
@@ -17,6 +18,7 @@
         "chart.js": "2.9.4",
         "element-plus": "^1.1.0-beta.20",
         "moment": "^2.29.1",
+        "readline": "^1.3.0",
         "tailwindcss": "^3",
         "vite-plugin-live-reload": "^3.0.1",
         "vue": "^3.2.20",

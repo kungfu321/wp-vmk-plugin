@@ -2,10 +2,10 @@
 
 /**
  * Plugin Name: WP VMK Plugin
- * Plugin URI: https://vomanhkien.com/
+ * Plugin URI: https://vomanhkien.com
  * Description: WP VMK Plugin
  * Author: Vo Manh Kien
- * Author URI: https://vomanhkien.com/
+ * Author URI: https://vomanhkien.com
  * Version: 1.0.0
  */
 define('WPVMKP_URL', plugin_dir_url(__FILE__));
@@ -14,7 +14,7 @@ define('WPVMKP_DIR', plugin_dir_path(__FILE__));
 define('WPVMKP_VERSION', '1.0.0');
 
 // This will automatically update, when you run dev or production
-define('WPVMKP_DEVELOPMENT', 'yes');
+define('WPVMKP_PRODUCTION', 'yes');
 
 class WPVMKPlugin
 {
