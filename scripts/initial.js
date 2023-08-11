@@ -8,11 +8,21 @@ const rl = readline.createInterface({
   output: process.stdout,
 });
 
+const initialValue = {
+  pluginName: 'WP VMK Plugin',
+  pluginSlug: 'wp-vmk-plugin',
+  pluginUrl: 'https://vomanhkien.com/wp-vmk-plugin',
+  authorUrl: 'https://vomanhkien.com',
+  authorName: 'Vo Manh Kien',
+  authorEmail: 'hi@vomanhkien.com',
+  pluginShortDesc: 'WP VMK Plugin'
+};
+
 const pluginName = () => {
   return new Promise((resolve) => {
     rl.question('Plugin Name: ', (answer) => {
       if (!answer) {
-        answer = 'WP VMK Plugin';
+        resolve(initialValue.pluginName);
       }
       resolve(answer);
     })
@@ -23,7 +33,7 @@ const pluginSlug = () => {
   return new Promise((resolve) => {
     rl.question('Plugin Slug: ', (answer) => {
       if (!answer) {
-        answer = 'wp-vmk-plugin';
+        resolve(initialValue.pluginSlug);
       }
       resolve(answer);
     })
@@ -34,7 +44,7 @@ const pluginUrl = () => {
   return new Promise((resolve) => {
     rl.question('Plugin Url: ', (answer) => {
       if (!answer) {
-        answer = 'https://vomanhkien.com';
+        resolve(initialValue.pluginUrl);
       }
       resolve(answer);
     })
@@ -45,7 +55,7 @@ const authorName = () => {
   return new Promise((resolve) => {
     rl.question('Author Name: ', (answer) => {
       if (!answer) {
-        answer = 'Vo Manh Kien';
+        resolve(initialValue.authorName);
       }
       resolve(answer);
     })
@@ -56,7 +66,7 @@ const authorEmail = () => {
   return new Promise((resolve) => {
     rl.question('Author Email: ', (answer) => {
       if (!answer) {
-        answer = 'hi@vomanhkien.com';
+        resolve(initialValue.authorEmail);
       }
       resolve(answer);
     })
@@ -67,7 +77,7 @@ const authorUrl = () => {
   return new Promise((resolve) => {
     rl.question('Author Url: ', (answer) => {
       if (!answer) {
-        answer = 'WP VMK Plugin';
+        resolve(initialValue.authorUrl);
       }
       resolve(answer);
     })
@@ -78,7 +88,7 @@ const pluginShortDesc = () => {
   return new Promise((resolve) => {
     rl.question('Plugin Short Desc: ', (answer) => {
       if (!answer) {
-        answer = 'WP VMK Plugin';
+        resolve(initialValue.pluginShortDesc);
       }
       resolve(answer);
     })
@@ -107,9 +117,24 @@ const updatePackageJson = async (slug, desc) => {
 
 const renameFile = async (slug) => {
   return new Promise((resolve) => {
-    fs.rename('wp-vmk-plugin.php', `${slug}.php`)
+    fs.rename(`${initialValue.pluginSlug}.php`, `${slug}.php`)
       .then(() => resolve())
       .catch(err => console.error(err));
+  });
+}
+
+const changePluginContent = async (files, oldContent, newContent) => {
+  return new Promise((resolve, reject) => {
+    files.forEach(file => {
+      fs.readFile(file, 'utf8')
+        .then(data => {
+          const updatedData = data.replaceAll(oldContent, newContent);
+
+          return fs.writeFile(file, updatedData, 'utf8');
+        })
+        .then(() => resolve())
+        .catch(err => reject(err));
+    });
   });
 }
 
@@ -126,14 +151,35 @@ const main = async () => {
   try {
     await updatePackageJson(pluginSlugAnswer, pluginShortDescAnswer);
     await renameFile(pluginSlugAnswer);
+    
+    // change plugin slug content
+    await changePluginContent([
+      `${pluginSlugAnswer}.php`,
+      'scripts/build-zip.js',
+      'src/env/development_mode.js',
+      'src/env/production_mode.js'
+    ], `${pluginSlugAnswer}.php`, pluginSlugAnswer);
+
+    // change plugin name
+    await changePluginContent([
+      `${pluginSlugAnswer}.php`,
+      'readme.txt',
+    ], initialValue.pluginName, pluginNameAnswer);
+
+    // change author name
+    await changePluginContent([
+      `${pluginSlugAnswer}.php`,
+      'readme.txt',
+    ], initialValue.authorName, authorNameAnswer);
   } catch (error) {
     const { exec } = require('child_process');
 
-    exec('git reset --hard', (error) => {
+    exec('git reset --hard && git clean -fxd', (error) => {
       if (error) {
         console.error(`exec error: ${error}`);
         return;
       }
+      console.error('Something went wrong.');
     });
   }
 };

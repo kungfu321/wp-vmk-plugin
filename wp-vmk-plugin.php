@@ -2,7 +2,7 @@
 
 /**
  * Plugin Name: WP VMK Plugin
- * Plugin URI: https://vomanhkien.com
+ * Plugin URI: https://vomanhkien.com/wp-vmk-plugin
  * Description: WP VMK Plugin
  * Author: Vo Manh Kien
  * Author URI: https://vomanhkien.com
