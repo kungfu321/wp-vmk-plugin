@@ -6,9 +6,9 @@ glob("wp-vmk-plugin.php", function(err, files) {
         files.forEach(function(item, index, array) {
         var data = fs.readFileSync(item, 'utf8');
         var mapObj = {
-           WPVMKP_PRODUCTION : "WPVMKP_DEVELOPMENT"
+           WPVMKPLUGIN_PRODUCTION : "WPVMKPLUGIN_DEVELOPMENT"
         };
-        var result = data.replace(/WPVMKP_PRODUCTION/gi, function(matched){
+        var result = data.replace(/WPVMKPLUGIN_PRODUCTION/gi, function(matched){
             return mapObj[matched];
         });
         fs.writeFile(item, result, 'utf8', function (err) {

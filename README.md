@@ -36,7 +36,7 @@ Note: same as `wp_enqueue_script`
 <p style="color: green;">
 No need to enqueue production manually again, It will enqueue from manifest on production. Just call `Vite::enqueueScript()`</p>
 
-`Vite::enqueueScript('my-plugin-script-boot', 'admin/start.js', array('jquery'), WPVMKP_VERSION, true)`
+`Vite::enqueueScript('my-plugin-script-boot', 'admin/start.js', array('jquery'), WPVMKPLUGIN_VERSION, true)`
 ---
 ###  NOT RECOMENDED
 If you want to use `wp_enqueue_script` then you have to call both dev and production manually:
@@ -44,10 +44,10 @@ If you want to use `wp_enqueue_script` then you have to call both dev and produc
 (Production and dev enqueue script should like this)
 
 ```
-if (defined('WPVMKP_DEVELOPMENT') && WPVMKP_DEVELOPMENT !== 'yes') {
-    wp_enqueue_script('WPVMKP-script-boot', WPVMKP_URL . 'assets/js/start.js', array('jquery'), WPVMKP_VERSION, false);
+if (defined('WPVMKPLUGIN_DEVELOPMENT') && WPVMKPLUGIN_DEVELOPMENT !== 'yes') {
+    wp_enqueue_script('WPVMKPLUGIN-script-boot', WPVMKPLUGIN_URL . 'assets/js/start.js', array('jquery'), WPVMKPLUGIN_VERSION, false);
 } else {
-    wp_enqueue_script('WPVMKP-script-boot', 'http://localhost:8880/' . 'src/admin/start.js', array('jquery'), WPVMKP_VERSION, true);
+    wp_enqueue_script('WPVMKPLUGIN-script-boot', 'http://localhost:8880/' . 'src/admin/start.js', array('jquery'), WPVMKPLUGIN_VERSION, true);
 }
 
 

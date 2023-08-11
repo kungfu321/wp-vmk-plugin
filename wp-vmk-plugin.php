@@ -10,13 +10,13 @@
  * Text Domain:   wp-vmk-plugin
  * Domain Path:   /languages
  */
-define('WPVMKP_URL', plugin_dir_url(__FILE__));
-define('WPVMKP_DIR', plugin_dir_path(__FILE__));
+define('WPVMKPLUGIN_URL', plugin_dir_url(__FILE__));
+define('WPVMKPLUGIN_DIR', plugin_dir_path(__FILE__));
 
-define('WPVMKP_VERSION', '1.0.0');
+define('WPVMKPLUGIN_VERSION', '1.0.0');
 
 // This will automatically update, when you run dev or production
-define('WPVMKP_DEVELOPMENT', 'yes');
+define('WPVMKPLUGIN_DEVELOPMENT', 'yes');
 
 class WPVMKPlugin
 {
@@ -32,7 +32,7 @@ class WPVMKPlugin
 
     public function loadClasses()
     {
-        require WPVMKP_DIR . 'includes/autoload.php';
+        require WPVMKPLUGIN_DIR . 'includes/autoload.php';
     }
 
     public function renderMenu()
@@ -69,14 +69,14 @@ class WPVMKPlugin
         $loadAssets = new \WPVMKPlugin\Classes\LoadAssets();
         $loadAssets->admin();
 
-        $WPVMKP = apply_filters('WPVMKP/admin_app_vars', array(
-            'assets_url' => WPVMKP_URL . 'assets/',
+        $WPVMKPLUGIN = apply_filters('WPVMKPLUGIN/admin_app_vars', array(
+            'assets_url' => WPVMKPLUGIN_URL . 'assets/',
             'ajaxurl' => admin_url('admin-ajax.php')
         ));
 
-        wp_localize_script('WPVMKP-script-boot', 'WPVMKPAdmin', $WPVMKP);
+        wp_localize_script('WPVMKPLUGIN-script-boot', 'WPVMKPAdmin', $WPVMKPLUGIN);
 
-        echo '<div class="WPVMKP-admin-page" id="WPVMKP_app">
+        echo '<div class="WPVMKPLUGIN-admin-page" id="WPVMKPLUGIN_app">
             <router-view></router-view>
         </div>';
     }
@@ -86,7 +86,7 @@ class WPVMKPlugin
         $loadAssets = new \WPVMKPlugin\Classes\LoadAssets();
         $loadAssets->frontend();
 
-        wp_localize_script('WPVMKP-script-boot-frontend', 'WPVMKPFrontend', array(
+        wp_localize_script('WPVMKPLUGIN-script-boot-frontend', 'WPVMKPFrontend', array(
             'isTrue' => true,
             'isFalse' => false,
         ));
@@ -101,7 +101,7 @@ class WPVMKPlugin
             $random = md5(uniqid(rand(), true));
 
             return "<div
-                    class='WPVMKP_frontend_app'
+                    class='WPVMKPLUGIN_frontend_app'
                     id='WPVMKPFrontend{$random}'
                 ></div>";
         }
@@ -125,7 +125,7 @@ class WPVMKPlugin
     {
         //activation deactivation hook
         register_activation_hook(__FILE__, function ($newWorkWide) {
-            require_once(WPVMKP_DIR . 'includes/Classes/Activator.php');
+            require_once(WPVMKPLUGIN_DIR . 'includes/Classes/Activator.php');
             $activator = new \WPVMKPlugin\Classes\Activator();
             $activator->migrateDatabases($newWorkWide);
         });

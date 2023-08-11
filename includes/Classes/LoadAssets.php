@@ -8,10 +8,10 @@ class LoadAssets
 {
     public function admin()
     {
-        Vite::enqueueScript('WPVMKP-script-boot', 'admin/admin.js', array('jquery'), WPVMKP_VERSION, true);
+        Vite::enqueueScript('WPVMKPLUGIN-script-boot', 'admin/admin.js', array('jquery'), WPVMKPLUGIN_VERSION, true);
     }
     public function frontend()
     {
-        Vite::enqueueScript('WPVMKP-script-boot-frontend', 'frontend/frontend.js', array('jquery'), WPVMKP_VERSION, true);
+        Vite::enqueueScript('WPVMKPLUGIN-script-boot-frontend', 'frontend/frontend.js', array('jquery'), WPVMKPLUGIN_VERSION, true);
     }
 }

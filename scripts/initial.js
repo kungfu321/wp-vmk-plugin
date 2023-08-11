@@ -16,7 +16,7 @@ const initialValue = {
   authorName: 'Vo Manh Kien',
   authorEmail: 'hi@vomanhkien.com',
   pluginShortDesc: 'WP VMK Plugin',
-  pluginPackage: 'WPVMKP'
+  pluginPackage: 'WPVMKPLUGIN'
 };
 
 const pluginName = () => {
@@ -147,7 +147,7 @@ const main = async () => {
       'scripts/build-zip.js',
       'src/env/development_mode.js',
       'src/env/production_mode.js'
-    ], `${pluginSlugAnswer}.php`, pluginSlugAnswer);
+    ], initialValue.pluginSlug, pluginSlugAnswer);
 
     // change plugin name
     await changePluginContent([
@@ -170,6 +170,24 @@ const main = async () => {
     await changePluginContent([
       `${pluginSlugAnswer}.php`,
     ], initialValue.authorUrl, authorUrlAnswer);
+
+    // change plugin Package
+    await changePluginContent([
+      `${pluginSlugAnswer}.php`,
+      'includes/autoload.php',
+      'includes/global_functions.php',
+      'includes/Classes/Activator.php',
+      'includes/Classes/LoadAssets.php',
+      'includes/Classes/Vite.php',
+      'src/admin/admin.js',
+      'src/admin/Bits/AJAX.js',
+      'src/env/development_mode.js',
+      'src/env/production_mode.js',
+      'src/frontend/frontend.js',
+      'src/admin/Bits/Plugin.js'
+    ], initialValue.pluginPackage,
+      pluginNameAnswer.toUpperCase().replaceAll(' ', '')
+    );
 
   } catch (error) {
     const { exec } = require('child_process');

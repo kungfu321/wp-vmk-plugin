@@ -1,5 +1,5 @@
 import app from './elements.js';
-import ajax from './AJAX'
+import ajax from './AJAX.js'
 
 import {
     applyFilters,
@@ -77,7 +77,7 @@ export default class WPVMKPlugin {
             return;
         }
 
-        this.addFilter('WPVMKP_top_menus', this.appVars.slug, function (menus) {
+        this.addFilter('WPVMKPLUGIN_top_menus', this.appVars.slug, function (menus) {
             menus = menus.filter(m => m.route !== route.name);
             menus.push({
                 route: route.name,
@@ -86,7 +86,7 @@ export default class WPVMKPlugin {
             return menus;
         });
 
-        this.addFilter('WPVMKP_global_routes', this.appVars.slug, function (routes) {
+        this.addFilter('WPVMKPLUGIN_global_routes', this.appVars.slug, function (routes) {
             routes = routes.filter(r => r.name !== route.name);
             routes.push(route);
             return routes;
@@ -120,7 +120,7 @@ export default class WPVMKPlugin {
     }
 
     saveData(key, data) {
-        let existingData = window.localStorage.getItem('__WPVMKP_data');
+        let existingData = window.localStorage.getItem('__WPVMKPLUGIN_data');
 
         if (!existingData) {
             existingData = {};
@@ -130,11 +130,11 @@ export default class WPVMKPlugin {
 
         existingData[key] = data;
 
-        window.localStorage.setItem('__WPVMKP_data', JSON.stringify(existingData));
+        window.localStorage.setItem('__WPVMKPLUGIN_data', JSON.stringify(existingData));
     }
 
     getData(key, defaultValue = false) {
-        let existingData = window.localStorage.getItem('__WPVMKP_data');
+        let existingData = window.localStorage.getItem('__WPVMKPLUGIN_data');
         existingData = JSON.parse(existingData);
         if (!existingData) {
             return defaultValue;

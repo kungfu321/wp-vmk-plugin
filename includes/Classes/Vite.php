@@ -106,7 +106,7 @@ class Vite
 
     public static function isDevMode()
     {
-        return defined('WPVMKP_DEVELOPMENT') && WPVMKP_DEVELOPMENT === 'yes';
+        return defined('WPVMKPLUGIN_DEVELOPMENT') && WPVMKPLUGIN_DEVELOPMENT === 'yes';
     }
 
     private static function getDevPath()
@@ -116,7 +116,7 @@ class Vite
 
     private static function getAssetPath()
     {
-        return WPVMKP_URL . 'assets/';
+        return WPVMKPLUGIN_URL . 'assets/';
     }
 
     private static function getProductionFilePath($file)
