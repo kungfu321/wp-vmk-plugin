@@ -260,7 +260,7 @@ const main = async () => {
       `${pluginNameAnswer}`.toUpperCase().replaceAll(' ', '')
     );
 
-    // exec('rm -rf .git');
+    exec('rm -rf .git');
 
   } catch (error) {
     exec('git reset --hard && git clean -fxd', (error) => {
