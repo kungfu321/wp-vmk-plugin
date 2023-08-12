@@ -188,6 +188,8 @@ const main = async () => {
       'includes/Classes/Activator.php',
       'includes/Classes/LoadAssets.php',
       'includes/Classes/Vite.php',
+      'includes/Classes/AdminAjaxHandler.php',
+      'includes/Classes/FrontendAjaxHandler.php',
       'src/admin/admin.js',
       'src/admin/Bits/AJAX.js',
       'src/env/development_mode.js',

@@ -33,6 +33,21 @@ class WPVMKPLUGIN
     public function loadClasses()
     {
         require WPVMKPLUGIN_DIR . 'includes/autoload.php';
+
+        if (is_admin()) {
+            // Top Level Ajax Handlers for Admin
+            $ajaxHandler = new \WPVMKPLUGIN\Classes\AdminAjaxHandler();
+            $ajaxHandler->registerEndpoints();
+        }
+
+        // Top Level Ajax Handlers
+        $ajaxHandler = new \WPVMKPLUGIN\Classes\FrontendAjaxHandler();
+        $ajaxHandler->registerEndpoints();
+    }
+
+    public function textDomain()
+    {
+        load_plugin_textdomain('WPVMKPLUGIN', false, WPVMKPLUGIN_DIR . 'languages');
     }
 
     public function renderMenu()
