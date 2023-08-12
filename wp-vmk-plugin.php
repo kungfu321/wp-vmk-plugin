@@ -42,11 +42,11 @@ class WPVMKPLUGIN
             $ajaxHandler->registerEndpoints();
         }
 
-        // START frontend
+        // START FrontendAjaxHandler
         // Top Level Ajax Handlers
         $ajaxHandler = new \WPVMKPLUGIN\Classes\FrontendAjaxHandler();
         $ajaxHandler->registerEndpoints();
-        // END frontend
+        // END FrontendAjaxHandler
     }
 
     public function textDomain()

@@ -166,6 +166,11 @@ const removeFEFile = async () => {
       '// END renderFrontendPage'
     );
     await removeBlockInFile(
+      `${initialValue.pluginSlug}.php`,
+      '// START FrontendAjaxHandler',
+      '// END FrontendAjaxHandler'
+    );
+    await removeBlockInFile(
       'includes/Classes/LoadAssets.php',
       '// START frontend',
       '// END frontend'
