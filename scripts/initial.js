@@ -17,7 +17,8 @@ const initialValue = {
   authorName: 'Vo Manh Kien',
   authorEmail: 'hi@vomanhkien.com',
   pluginShortDesc: 'WP VMK Plugin',
-  pluginPackage: 'WPVMKPLUGIN'
+  pluginPackage: 'WPVMKPLUGIN',
+  adminOnly: '0'
 };
 
 const pluginName = () => {
@@ -86,8 +87,19 @@ const pluginShortDesc = () => {
   })
 }
 
+const adminOnly = () => {
+  return new Promise((resolve) => {
+    rl.question('Admin Only (0/1): ', (answer) => {
+      if (!answer) {
+        resolve(initialValue.adminOnly);
+      }
+      resolve(answer);
+    })
+  })
+}
+
 const updatePackageJson = async (slug, desc) => {
-  if (slug === initialValue.pluginSlug && desc === initialValue.description) return;
+  if (slug === initialValue.pluginSlug && desc === initialValue.pluginShortDesc) return;
   return new Promise((resolve) => {
     fs.readFile('package.json', 'utf8', function (err, data) {
       if (err) throw err;
@@ -132,6 +144,49 @@ const changePluginContent = async (files, oldContent, newContent) => {
   });
 }
 
+const removeBlockInFile = async (filePath, startMarker, endMarker) => {
+  let fileContent = await fs.readFile(filePath, 'utf8');
+
+  const regex = new RegExp(`${startMarker}[\\s\\S]*${endMarker}`, 'gm');
+  fileContent = fileContent.replace(regex, '');
+
+  await fs.writeFile(filePath, fileContent);
+}
+
+const removeFEFile = async () => {
+  try {
+    await removeBlockInFile(
+      `${initialValue.pluginSlug}.php`,
+      '// START frontend',
+      '// END frontend'
+    );
+    await removeBlockInFile(
+      `${initialValue.pluginSlug}.php`,
+      '// START renderFrontendPage',
+      '// END renderFrontendPage'
+    );
+    await removeBlockInFile(
+      `${initialValue.pluginSlug}.php`,
+      '// START FrontendAjaxHandler',
+      '// END FrontendAjaxHandler'
+    );
+    await removeBlockInFile(
+      'includes/Classes/LoadAssets.php',
+      '// START frontend',
+      '// END frontend'
+    );
+
+    exec('rm -rf src/frontend');
+    exec('rm -rf includes/Classes/FrontendAjaxHandler.php');
+
+    await changePluginContent([
+      'vite.config.js'
+    ], "'src/frontend/frontend.js',", "");
+  } catch (error) {
+    console.log(error);
+  }
+}
+
 const main = async () => {
   const pluginNameAnswer = await pluginName();
   const pluginSlugAnswer = await pluginSlug();
@@ -139,9 +194,14 @@ const main = async () => {
   const authorNameAnswer = await authorName();
   const authorUrlAnswer = await authorUrl();
   const pluginShortDescAnswer = await pluginShortDesc();
+  const adminOnlyAnswer = await adminOnly();
   rl.close();
 
   try {
+    if (Number(adminOnlyAnswer) === 1) {
+      await removeFEFile();
+    }
+
     await updatePackageJson(pluginSlugAnswer, pluginShortDescAnswer);
     await renameFile(pluginSlugAnswer);
 
@@ -200,7 +260,7 @@ const main = async () => {
       `${pluginNameAnswer}`.toUpperCase().replaceAll(' ', '')
     );
 
-    exec('rm -rf .git');
+    // exec('rm -rf .git');
 
   } catch (error) {
     exec('git reset --hard && git clean -fxd', (error) => {
