@@ -27,9 +27,9 @@ class WPVMKPLUGIN
         $this->ActivatePlugin();
         $this->renderMenu();
         $this->disableUpdateNag();
-        // START frontend
+        // START renderFrontendPage
         $this->renderFrontendPage();
-        // END frontend
+        // END renderFrontendPage
     }
 
     public function loadClasses()
