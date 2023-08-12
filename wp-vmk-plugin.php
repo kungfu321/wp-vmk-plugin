@@ -27,7 +27,9 @@ class WPVMKPLUGIN
         $this->ActivatePlugin();
         $this->renderMenu();
         $this->disableUpdateNag();
+        // START frontend
         $this->renderFrontendPage();
+        // END frontend
     }
 
     public function loadClasses()
@@ -40,9 +42,11 @@ class WPVMKPLUGIN
             $ajaxHandler->registerEndpoints();
         }
 
+        // START frontend
         // Top Level Ajax Handlers
         $ajaxHandler = new \WPVMKPLUGIN\Classes\FrontendAjaxHandler();
         $ajaxHandler->registerEndpoints();
+        // END frontend
     }
 
     public function textDomain()
@@ -96,6 +100,7 @@ class WPVMKPLUGIN
         </div>';
     }
 
+    // START frontend
     public function renderFrontendPage()
     {
         $loadAssets = new \WPVMKPLUGIN\Classes\LoadAssets();
@@ -106,6 +111,7 @@ class WPVMKPLUGIN
             'isFalse' => false,
         ));
     }
+    // END frontend
 
     public function registerShortCodes()
     {
