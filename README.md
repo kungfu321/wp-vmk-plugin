@@ -11,4 +11,8 @@ This is a Customizable sample WordPress Plugin which is developed as a single pa
 - command: `yarn watch` for development and for production: `yarn production`
 - command: `yarn build-zip` for plugin as zip file
 
+## Demo Video on Youtube
+
+[![Tạo Plugin Wordpress nhanh chóng trong 30s](https://i.ytimg.com/vi/eaG6lH9QYcM/maxresdefault.jpg)](https://www.youtube.com/watch?v=eaG6lH9QYcM)
+
 Forked from: [wp-boilerplate-vue-with-vite](https://github.com/hasanuzzamanbe/wp-boilerplate-vue-with-vite)
