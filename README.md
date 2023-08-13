@@ -10,3 +10,5 @@ This is a Customizable sample WordPress Plugin which is developed as a single pa
 - command: `yarn initial` and enter your infonation
 - command: `yarn watch` for development and for production: `yarn production`
 - command: `yarn build-zip` for plugin as zip file
+
+Forked from: [wp-boilerplate-vue-with-vite](https://github.com/hasanuzzamanbe/wp-boilerplate-vue-with-vite)
