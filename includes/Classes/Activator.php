@@ -8,7 +8,6 @@ if (!defined('ABSPATH')) {
 
 /**
  * Ajax Handler Class
- * @since 1.0.0
  */
 class Activator
 {

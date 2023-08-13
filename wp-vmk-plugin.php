@@ -16,7 +16,7 @@ define('WPVMKPLUGIN_DIR', plugin_dir_path(__FILE__));
 define('WPVMKPLUGIN_VERSION', '1.0.0');
 
 // This will automatically update, when you run dev or production
-define('WPVMKPLUGIN_DEVELOPMENT', 'yes');
+define('WPVMKPLUGIN_PRODUCTION', 'yes');
 
 class WPVMKPLUGIN
 {

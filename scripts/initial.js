@@ -24,10 +24,7 @@ const initialValue = {
 const pluginName = () => {
   return new Promise((resolve) => {
     rl.question('Plugin Name: ', (answer) => {
-      if (!answer) {
-        resolve(initialValue.pluginName);
-      }
-      resolve(answer);
+      resolve(answer || initialValue.pluginName);
     })
   })
 }
@@ -35,10 +32,7 @@ const pluginName = () => {
 const pluginSlug = () => {
   return new Promise((resolve) => {
     rl.question('Plugin Slug: ', (answer) => {
-      if (!answer) {
-        resolve(initialValue.pluginSlug);
-      }
-      resolve(answer);
+      resolve(answer || initialValue.pluginSlug);
     })
   })
 }
@@ -46,10 +40,7 @@ const pluginSlug = () => {
 const pluginUrl = () => {
   return new Promise((resolve) => {
     rl.question('Plugin Url: ', (answer) => {
-      if (!answer) {
-        resolve(initialValue.pluginUrl);
-      }
-      resolve(answer);
+      resolve(answer || initialValue.pluginUrl);
     })
   })
 }
@@ -57,10 +48,7 @@ const pluginUrl = () => {
 const authorName = () => {
   return new Promise((resolve) => {
     rl.question('Author Name: ', (answer) => {
-      if (!answer) {
-        resolve(initialValue.authorName);
-      }
-      resolve(answer);
+      resolve(answer || initialValue.authorName);
     })
   })
 }
@@ -68,10 +56,7 @@ const authorName = () => {
 const authorUrl = () => {
   return new Promise((resolve) => {
     rl.question('Author Url: ', (answer) => {
-      if (!answer) {
-        resolve(initialValue.authorUrl);
-      }
-      resolve(answer);
+      resolve(answer || initialValue.authorUrl);
     })
   })
 }
@@ -79,10 +64,7 @@ const authorUrl = () => {
 const pluginShortDesc = () => {
   return new Promise((resolve) => {
     rl.question('Plugin Short Desc: ', (answer) => {
-      if (!answer) {
-        resolve(initialValue.pluginShortDesc);
-      }
-      resolve(answer);
+      resolve(answer || initialValue.pluginShortDesc);
     })
   })
 }
@@ -90,10 +72,7 @@ const pluginShortDesc = () => {
 const adminOnly = () => {
   return new Promise((resolve) => {
     rl.question('Admin Only (0/1): ', (answer) => {
-      if (!answer) {
-        resolve(initialValue.adminOnly);
-      }
-      resolve(answer);
+      resolve(answer || initialValue.adminOnly);
     })
   })
 }
